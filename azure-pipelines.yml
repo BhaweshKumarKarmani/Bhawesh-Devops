@@ -1,0 +1,21 @@
+trigger:
+  - main
+
+pool:
+  name: Default
+
+steps:
+  # Install Docker on the build agent
+  - task: DockerInstaller@0
+    displayName: 'Install Docker'
+
+  # Build and Push Docker Image
+  - task: Docker@2
+    displayName: 'Build and Push Docker Image'
+    inputs:
+      containerRegistry: 'Docker-Connection'  # Service connection name in Azure DevOps
+      repository: 'bhawesh27/bhawesh-docker'
+      command: 'buildAndPush'
+      Dockerfile: 'Calculator-Using-NodeJS/Dockerfile'
+      tags: |
+        latest

@@ -1,3 +1,6 @@
-FROM nginx:alpine
-COPY . /usr/share/nginx/src/public/html
+FROM node:14
+WORKDIR /app
+COPY . .
+RUN npm install
 EXPOSE 3000
+CMD ["npm", "start"]
